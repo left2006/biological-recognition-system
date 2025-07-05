@@ -1,0 +1,28 @@
+-- 创建识别记录表
+CREATE TABLE IF NOT EXISTS `recognition_records` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `user_id` bigint(20) NOT NULL DEFAULT 1 COMMENT '用户ID',
+  `image_url` varchar(500) NOT NULL COMMENT '图片URL',
+  `image_hash` varchar(64) DEFAULT NULL COMMENT '图片哈希值',
+  `recognition_result` varchar(255) NOT NULL COMMENT '识别结果',
+  `confidence_score` decimal(5,4) DEFAULT NULL COMMENT '置信度分数',
+  `species_id` bigint(20) DEFAULT NULL COMMENT '物种ID',
+  `processing_time` bigint(20) DEFAULT NULL COMMENT '处理时间(毫秒)',
+  `status` int(11) NOT NULL DEFAULT 1 COMMENT '状态：1-成功，0-失败',
+  `error_message` text DEFAULT NULL COMMENT '错误信息',
+  `created_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `scientific_name` varchar(255) DEFAULT NULL COMMENT '学名',
+  `common_name` varchar(255) DEFAULT NULL COMMENT '俗名',
+  `conservation_status` varchar(255) DEFAULT NULL COMMENT '保护状态',
+  `characteristics` text DEFAULT NULL COMMENT '形态特征',
+  `habitat` text DEFAULT NULL COMMENT '栖息地',
+  `distribution` text DEFAULT NULL COMMENT '分布区域',
+  `size_range` varchar(255) DEFAULT NULL COMMENT '体型范围',
+  `diet` varchar(255) DEFAULT NULL COMMENT '食性',
+  `description` text DEFAULT NULL COMMENT '详细描述',
+  `classification` text DEFAULT NULL COMMENT '分类信息',
+  PRIMARY KEY (`id`),
+  KEY `idx_user_id` (`user_id`),
+  KEY `idx_created_time` (`created_time`),
+  KEY `idx_status` (`status`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='海洋生物识别记录表'; 

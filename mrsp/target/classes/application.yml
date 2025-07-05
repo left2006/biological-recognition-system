@@ -1,0 +1,74 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ocean_db?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 6458552as
+    # Druid 数据源配置
+    druid:
+      initial-size: 5  # 初始化连接数
+      min-idle: 5      # 最小空闲连接数
+      max-active: 20   # 最大连接数
+      max-wait: 60000  # 获取连接时最大等待时间
+      validation-query: SELECT 1 FROM DUAL  # 校验连接的SQL
+  servlet:
+    context-path: /mrsp_server
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+mybatis-plus:
+  # 不支持多包, 如有需要可在注解配置 或 提升扫包等级
+  # 例如 com.**.**.mapper
+  mapperPackage: com.gec.marine.mapper
+  # 对应的 XML 文件位置
+  mapperLocations: classpath*:mapper/**/*Mapper.xml
+  # 实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.gec.marine.entity
+  # 启动时是否检查 MyBatis XML 文件的存在，默认不检查
+  checkConfigLocation: false
+  configuration:
+    # 自动驼峰命名规则（camel case）映射   数据库表的字段user_name---->实体类的userName
+    mapUnderscoreToCamelCase: true
+    # MyBatis 自动映射策略
+    # NONE：不启用 PARTIAL：只对非嵌套 resultMap 自动映射 FULL：对所有 resultMap 自动映射
+    autoMappingBehavior: FULL
+    # MyBatis 自动映射时未知列或未知属性处理策
+    # NONE：不做处理 WARNING：打印相关警告 FAILING：抛出异常和详细信息
+    autoMappingUnknownColumnBehavior: NONE
+    # 更详细的日志输出 会有性能损耗 org.apache.ibatis.logging.stdout.StdOutImpl
+    # 默认日志输出 org.apache.ibatis.logging.slf4j.Slf4jImpl
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+server:
+  servlet:
+    context-path: /mrsp_server
+  port: 8080
+# 通义千问配置
+langchain4j:
+  open-ai:
+    chat-model:
+      api-key: sk-65815cbce21441fbab3af6276c527201
+      base-url: https://api.deepseek.com
+      model-name: deepseek-chat
+# 通义千问配置
+qwen:
+  api:
+    key: sk-74b1cff139e2494fbca2241c8f8f4c9c  # 请替换为您的真实API Key
+    endpoint: https://dashscope.aliyuncs.com/api/v1/services/aigc/multimodal-generation/generation
+    model: qwen-vl-plus
+  chat-model: qwen-plus
+  embedding-model: text-embedding-v1
+  temperature: 0.3
+  max-tokens: 2000
+# RAG配置
+rag:
+  max-results: 3
+  min-score: 0.5
+  chunk-size: 500
+deepseek:
+  api-key: sk-65815cbce21441fbab3af6276c527201
+  model: deepseek-chat
+  base-url: https://api.deepseek.com/v1
+  timeout: 60
+  max-tokens: 4000
+  temperature: 0.3
